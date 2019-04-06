@@ -18,7 +18,7 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config["CLEARDB_DATABASE_URL"] =  configs.database_link
+app.config["CLEARDB_DATABASE_URL"] =  ""
 #
 db = SQLAlchemy(app)
 
@@ -32,11 +32,9 @@ Base.prepare(db.engine, reflect=True)
 # Samples_Metadata = Base.classes.sample_metadata
 # Samples = Base.classes.samples
 
-
-@app.route("/")
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    """Return the homepage."""
-    return render_template("index.html")
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
