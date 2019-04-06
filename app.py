@@ -17,10 +17,13 @@ app = Flask(__name__)
 #################################################
 # Database Setup
 #################################################
-
-app.config["CLEARDB_DATABASE_URL"] =  ""
 #
+
+
+app.config["CLEARDB_DATABASE_URL"] =   configs.database_link
 db = SQLAlchemy(app)
+
+
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -33,6 +36,7 @@ Base.prepare(db.engine, reflect=True)
 # Samples = Base.classes.samples
 
 @app.route('/', methods=['GET', 'POST'])
+@app.route('/templates/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
