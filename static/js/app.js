@@ -1,4 +1,4 @@
-//const API_KEY = "pk.eyJ1IjoiY2Fta2lyayIsImEiOiJjanRreWRjOHAwODV3NGFwaDJ0aDhzMmZyIn0.-2ThPrlMkFOzt87qLL5PyA";
+const API_KEY = "pk.eyJ1IjoiY2Fta2lyayIsImEiOiJjanRreWRjOHAwODV3NGFwaDJ0aDhzMmZyIn0.-2ThPrlMkFOzt87qLL5PyA";
 
 // Creating map object
 let map = L.map("map", {

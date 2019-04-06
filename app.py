@@ -6,7 +6,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-import configs 
+#import configs 
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -20,7 +20,7 @@ app = Flask(__name__)
 #
 
 
-app.config["CLEARDB_DATABASE_URL"] =   configs.database_link
+#app.config["CLEARDB_DATABASE_URL"] =   configs.database_link
 db = SQLAlchemy(app)
 
 
