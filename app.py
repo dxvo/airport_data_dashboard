@@ -18,7 +18,7 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-app.config["CLEARDB_DATABASE_URL"] =  configs.database_link
+#app.config["CLEARDB_DATABASE_URL"] =  configs.database_link
 db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
@@ -38,4 +38,4 @@ def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
