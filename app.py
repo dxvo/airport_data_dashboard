@@ -20,6 +20,8 @@ app = Flask(__name__)
 
 # Don't push SQLite to git
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
+# app.config to route outside of repo to avoid large file
+
 db = SQLAlchemy(app)
 
 
@@ -94,5 +96,5 @@ def tooltip():
 #     return jsonify(tooltip)
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
