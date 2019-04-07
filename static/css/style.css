@@ -1,12 +1,54 @@
 
-header{
-  text-align: center;
+.jumbotron{
+  background-image: url("../img/airplane.jpg");
+  background-attachment: fixed;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 1500px 350px;
 }
 
-#map,
-body,
-html {
-  height: 550px;
-  width: 850px; 
+#map {
+  height: 500px;
+  width: 950px;
 }
 
+.hero {
+  position: relative;
+  margin: 0;
+}
+
+.hero h1 {
+  margin-top: 50px;
+  font-size: 4rem;
+  color: rgb(0, 132, 255); 
+  animation: title 1.2s forwards linear;
+}
+
+.hero p {
+  font-size: 1rem;
+  color: rgb(0, 132, 255); 
+  animation: subtitle 1.2s forwards linear;
+  animation-delay: 1.2s;
+} 
+
+@keyframes title {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    font-size: 4.5rem;
+    opacity: 1;
+  }
+}
+
+@keyframes smaller-title {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    font-size: 5.5rem;
+    opacity: 1;
+  }
+}
