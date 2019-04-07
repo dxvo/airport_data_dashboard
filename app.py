@@ -22,6 +22,7 @@ app = Flask(__name__)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
 # app.config to route outside of repo to avoid large file
 
+
 db = SQLAlchemy(app)
 
 
@@ -56,7 +57,13 @@ def tooltip():
         info.home_link
     ]
 
+    selCon = [
+        Airport_Route.Origin
+    ]
+
+    resultsCon = db.session.query(*selCon)
     results = db.session.query(*sel).filter(info.type == "large_airport").all()
+
 
     tooltip = []
     for result in results:
@@ -70,7 +77,49 @@ def tooltip():
             "iata_code": result[6],
             "home_link": result[7]
         })
+    
+
     return jsonify(tooltip)
+
+@app.route("/conn")
+def conn():
+
+    selCon = [
+        Airport_Route.Origin
+    ]
+
+    sel = [
+        info.type,
+        info.name,
+        info.latitude,
+        info.longitude,
+        info.elevation,
+        info.municipality,
+        info.iata_code,
+        info.home_link
+    ]
+
+    first = db.session.query(*selCon).distinct()
+    second = db.session.query(*sel)
+    first.join(second.iata_code)
+
+
+
+    uniqueAirports = []
+    for airport in resultsCon:
+        uniqueAirports.append({
+            "Airport": airport[0],
+            "type": airport[1],
+            "name": airport[2],
+            "latitude": airport[3],
+            "longitude": airport[4],
+            "elevation": airport[5],
+            "municiaplity": airport[6],
+            "iata_code": airport[7],
+            "home_link": airport[8]
+        })
+
+    return jsonify(uniqueAirports)
 
 # @app.route("/airports")
 # def airports():
