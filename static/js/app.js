@@ -1,5 +1,3 @@
-const API_KEY = "pk.eyJ1IjoiY2Fta2lyayIsImEiOiJjanRreWRjOHAwODV3NGFwaDJ0aDhzMmZyIn0.-2ThPrlMkFOzt87qLL5PyA";
-
 // Creating map object
 let map = L.map("map", {
   center: [39.8283, -98.5795],
@@ -10,6 +8,24 @@ let map = L.map("map", {
 L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
   maxZoom: 18,
-  id: "mapbox.streets",
+  id: "mapbox.outdoors",
   accessToken: API_KEY
 }).addTo(map);
+
+d3.json("/tooltip", (data) => {
+  console.log(data[0].latitude)
+
+  for (let i = 0; i < data.length; i++) {
+    
+  L.circle([data[i].latitude, data[i].longitude], {
+    fillOpacity: 0.5,
+    color: "black",
+    weight: 0.4,
+    fillColor: "red",
+    radius: 20000
+  }).bindPopup("<h1>" + data[i].name + "</h1>")
+  .addTo(map);
+
+}
+
+});
