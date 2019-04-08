@@ -1,5 +1,3 @@
-var API_KEY = "pk.eyJ1IjoiandvaDEzMjMiLCJhIjoiY2p0bGw5MmV5MDduYzQ0bGJhd2czamRmNyJ9.1zN6LD4MMEaOubjEcpkbNA"
-
 // Creating map object
 let map = L.map("map", {
   center: [39.8283, -98.5795],
@@ -14,6 +12,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(map);
 
+
 d3.json("/tooltip", (data) => {
   console.log(data)
 
@@ -23,14 +22,27 @@ d3.json("/tooltip", (data) => {
     fillOpacity: 0.5,
     color: "black",
     weight: 0.4,
-    fillColor: "red",
-    radius: 20000
-  }).bindPopup("<h1>" + data[i].name + "</h1>")
+    fillColor: "green",
+    radius: 40000
+  }).bindPopup("<h4>" + data[i].name + "</h4>")
   .addTo(map);
 
 }
+
+// d3.select("#paneldiv")
+// .data(data)
+// .enter()
+// .append("text")
+// .html(function(d) {
+//     console.log(d)
+//     return "<h8><strong>"+ d.name+"</strong></h8>"+
+//         "<table>"+
+//         "<tr>"+
+//         "<td class='tooltipindex'>d.elevation </td>"+
+//         "<td>"+d.municipality+"</td>"+
+//         "</tr>"+
+//         "</table>";
+// })
+
 });
 
-d3.json("/conn", (data) => {
-  console.log(data);
-});

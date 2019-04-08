@@ -1,12 +1,4 @@
 
-.jumbotron{
-  background-image: url("../img/airplane.jpg");
-  background-attachment: fixed;
-  background-position: top center;
-  background-repeat: no-repeat;
-  background-size: 1500px 350px;
-}
-
 #map {
   height: 500px;
   width: 950px;
@@ -18,18 +10,18 @@
 }
 
 .hero h1 {
-  margin-top: 50px;
+  height: 250px;
+  margin-top: 40px; 
+  margin-bottom: 40px;  
   font-size: 4rem;
-  color: rgb(0, 132, 255); 
+  color: rgb(245, 247, 248); 
   animation: title 1.2s forwards linear;
+  background-image: url("../img/airplane.jpg");
+  background-attachment: fixed;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: 1500px 350px;
 }
-
-.hero p {
-  font-size: 1rem;
-  color: rgb(0, 132, 255); 
-  animation: subtitle 1.2s forwards linear;
-  animation-delay: 1.2s;
-} 
 
 @keyframes title {
   from {
@@ -51,4 +43,33 @@
     font-size: 5.5rem;
     opacity: 1;
   }
+}
+
+.accordion {
+  background-color: white;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: azure;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+} 
+
+.header {
+padding-top: 40px;
+color: rgb(0, 132, 255);
+text-align: center;
 }

@@ -5,7 +5,7 @@ import numpy as np
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func, and_
 
 from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -13,25 +13,11 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 
-#################################################
-# Database Setup
-#################################################
-#
-
-# Don't push SQLite to git
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
-# app.config to route outside of repo to avoid large file
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../airport_sql/airport_db.sqlite"
-
-
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
 db = SQLAlchemy(app)
 
-
-
-# reflect an existing database into a new model
 Base = automap_base()
 
-# reflect the tables
 Base.prepare(db.engine, reflect=True)
 
 # # Save references to each table
@@ -58,6 +44,7 @@ def tooltip():
         info.home_link
     ]
 
+<<<<<<< HEAD
     selCon = [
         Airport_Route.Origin,
         Airport_Route.Origin_lat,
@@ -67,6 +54,9 @@ def tooltip():
     resultsCon = db.session.query(*selCon).distinct(Airport_Route.Origin)
     results = db.session.query(*sel).filter(info.type == "large_airport").all()
 
+=======
+    results = db.session.query(*sel).all()
+>>>>>>> 0ed56869a5ef10140da6d0b085dc250445611fa0
 
     tooltip = []
     # for result in results:
@@ -86,72 +76,51 @@ def tooltip():
             "lat": result[1],
             "lon": result[2]
         })
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ed56869a5ef10140da6d0b085dc250445611fa0
     return jsonify(tooltip)
 
-@app.route("/conn")
-def conn():
 
-    selCon = [
-        Airport_Route.Origin,
-        info.municipality,
-        info.iata_code
-    ]
-
+@app.route("/airlines")
+def airline():
+  
     sel = [
-        info.type,
-        info.name,
-        info.latitude,
-        info.longitude,
-        info.elevation,
-        info.municipality,
-        info.iata_code,
-        info.home_link
+        Delay_By_Airline.Reporting_Airline,
+        Delay_By_Airline.Dep_On_Late_Arr,
+        Delay_By_Airline.Carrier_Delay,
+        Delay_By_Airline.Weather_Delay,
+        Delay_By_Airline.NAS_Delay,
+        Delay_By_Airline.Security_Delay,
+        Delay_By_Airline.Aircraft_Delay,
+        Delay_By_Airline.Year
     ]
+<<<<<<< HEAD
     first = db.session.query(*selCon).distinct()
     second = db.session.query(*sel)
     # third = first.join(second)
 
+=======
 
+    results = db.session.query(*sel).all()
+>>>>>>> 0ed56869a5ef10140da6d0b085dc250445611fa0
 
-    uniqueAirports = []
-    for airport in first:
-        uniqueAirports.append({
-            "Airport": airport[0]
-    #         "type": airport[1],
-    #         "name": airport[2],
-    #         "latitude": airport[3],
-    #         "longitude": airport[4],
-    #         "elevation": airport[5],
-    #         "municiaplity": airport[6],
-    #         "iata_code": airport[7],
-    #         "home_link": airport[8]
+    airlines = []
+    for result in results:
+        airlines.append({
+            "Reporting_Airine": result[0],
+            "Dep_On_Late_Arr": result[1],
+            "Carrier_Delay": result[2],
+            "Weather_Delay": result[3],
+            "NAS_Delay": result[4],
+            "Security_Delay": result[5],
+            "Aircraft_Delay": result[6],
+            "Year": result[7]
         })
+    return jsonify(airlines)
 
-    return jsonify(uniqueAirports)
 
-# @app.route("/airports")
-# def airports():
-  
-#     sel = [
-#         Monthly_Average.
-#     ]
-
-#     results = db.session.query(*sel).filter(info.type == "large_airport").all()
-
-#     tooltip = []
-#     for result in results:
-#         tooltip.append({
-#             "type": result[0],
-#             "name": result[1],
-#             "latitude": result[2],
-#             "longitude": result[3],
-#             "elevation": result[4],
-#             "municiaplity": result[5],
-#             "iata_code": result[6],
-#             "home_link": result[7]
-#         })
-#     return jsonify(tooltip)
 
 
 if __name__ == "__main__":
