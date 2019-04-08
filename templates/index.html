@@ -6,44 +6,58 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-  <!-- Leaflet CSS & JS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
   <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
   crossorigin=""></script>
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-  <!--D3 cdn-->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
-
-  <!-- Our CSS -->
   <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 </head>
 
 <body>
   
-<div class="jumbotron jumbotron-fluid">
     <div class="hero text-center">
         <h1>Airport Performance Dashboard</h1>
-            <p>All airports in US</p>
     </div>
-</div>
 
 <div class="container-fluid">
   <div class = "row">
-    <div class = "col-6">
+    <div class = "col-lg-8">
         <div id="map" style = "position: relative">
         </div>
+    </div>
+    <div id="paneldiv" class="col-lg-4">
     </div>       
   </div>
 </div>
 
-  
+<div class="header">
+  <h3>Airlines Statistics</h3>
+</div>
+
+<button class="accordion">On Time Arrival Late</button>
+<div class="panel">
+  <div class="container-fluid">
+  <div class="row">
+        <div id="bar3"></div>
+        <div id="bar4"></div> 
+  </div>
+  </div>
+</div>
+
+<button class="accordion">Delay Reasons</button>
+<div class="panel">
+    <div class="container-fluid">
+        <div class="row">
+        <div id="bar"></div>
+        <div id="bar2"></div> 
+  </div>
+  </div>
+</div>
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -53,6 +67,8 @@
   <!-- API key -->
 <!--   <script type="text/javascript" src="../static/js/config.js"></script> -->
   <!-- Our JS -->
+  <script type="text/javascript" src="../static/js/config.js"></script>
   <script type="text/javascript" src="../static/js/app.js"></script>
+  <script type="text/javascript" src="../static/js/static.js"></script>
 </body>
 </html>
