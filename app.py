@@ -44,42 +44,20 @@ def tooltip():
         info.home_link
     ]
 
-<<<<<<< HEAD
-    selCon = [
-        Airport_Route.Origin,
-        Airport_Route.Origin_lat,
-        Airport_Route.Origin_long
-    ]
-
-    resultsCon = db.session.query(*selCon).distinct(Airport_Route.Origin)
-    results = db.session.query(*sel).filter(info.type == "large_airport").all()
-
-=======
     results = db.session.query(*sel).all()
->>>>>>> 0ed56869a5ef10140da6d0b085dc250445611fa0
 
     tooltip = []
-    # for result in results:
-    #     tooltip.append({
-    #         "type": result[0],
-    #         "name": result[1],
-    #         "latitude": result[2],
-    #         "longitude": result[3],
-    #         "elevation": result[4],
-    #         "municiaplity": result[5],
-    #         "iata_code": result[6],
-    #         "home_link": result[7]
-    #     })
-    for result in resultsCon:
+    for result in results:
         tooltip.append({
-            "airport": result[0],
-            "lat": result[1],
-            "lon": result[2]
+            "type": result[0],
+            "name": result[1],
+            "latitude": result[2],
+            "longitude": result[3],
+            "elevation": result[4],
+            "municiaplity": result[5],
+            "iata_code": result[6],
+            "home_link": result[7]
         })
-<<<<<<< HEAD
-
-=======
->>>>>>> 0ed56869a5ef10140da6d0b085dc250445611fa0
     return jsonify(tooltip)
 
 
@@ -96,15 +74,8 @@ def airline():
         Delay_By_Airline.Aircraft_Delay,
         Delay_By_Airline.Year
     ]
-<<<<<<< HEAD
-    first = db.session.query(*selCon).distinct()
-    second = db.session.query(*sel)
-    # third = first.join(second)
-
-=======
 
     results = db.session.query(*sel).all()
->>>>>>> 0ed56869a5ef10140da6d0b085dc250445611fa0
 
     airlines = []
     for result in results:
