@@ -21,6 +21,7 @@ app = Flask(__name__)
 # Don't push SQLite to git
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
 # app.config to route outside of repo to avoid large file
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///../airport_sql/airport_db.sqlite"
 
 
 db = SQLAlchemy(app)
@@ -85,7 +86,9 @@ def tooltip():
 def conn():
 
     selCon = [
-        Airport_Route.Origin
+        Airport_Route.Origin,
+        info.municipality,
+        info.iata_code
     ]
 
     sel = [
@@ -101,22 +104,22 @@ def conn():
 
     first = db.session.query(*selCon).distinct()
     second = db.session.query(*sel)
-    first.join(second.iata_code)
+    # third = first.join(second)
 
 
 
     uniqueAirports = []
-    for airport in resultsCon:
+    for airport in first:
         uniqueAirports.append({
-            "Airport": airport[0],
-            "type": airport[1],
-            "name": airport[2],
-            "latitude": airport[3],
-            "longitude": airport[4],
-            "elevation": airport[5],
-            "municiaplity": airport[6],
-            "iata_code": airport[7],
-            "home_link": airport[8]
+            "Airport": airport[0]
+    #         "type": airport[1],
+    #         "name": airport[2],
+    #         "latitude": airport[3],
+    #         "longitude": airport[4],
+    #         "elevation": airport[5],
+    #         "municiaplity": airport[6],
+    #         "iata_code": airport[7],
+    #         "home_link": airport[8]
         })
 
     return jsonify(uniqueAirports)
