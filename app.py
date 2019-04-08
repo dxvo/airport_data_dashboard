@@ -59,26 +59,33 @@ def tooltip():
     ]
 
     selCon = [
-        Airport_Route.Origin
+        Airport_Route.Origin,
+        Airport_Route.Origin_lat,
+        Airport_Route.Origin_long
     ]
 
-    resultsCon = db.session.query(*selCon)
+    resultsCon = db.session.query(*selCon).distinct(Airport_Route.Origin)
     results = db.session.query(*sel).filter(info.type == "large_airport").all()
 
 
     tooltip = []
-    for result in results:
+    # for result in results:
+    #     tooltip.append({
+    #         "type": result[0],
+    #         "name": result[1],
+    #         "latitude": result[2],
+    #         "longitude": result[3],
+    #         "elevation": result[4],
+    #         "municiaplity": result[5],
+    #         "iata_code": result[6],
+    #         "home_link": result[7]
+    #     })
+    for result in resultsCon:
         tooltip.append({
-            "type": result[0],
-            "name": result[1],
-            "latitude": result[2],
-            "longitude": result[3],
-            "elevation": result[4],
-            "municiaplity": result[5],
-            "iata_code": result[6],
-            "home_link": result[7]
+            "airport": result[0],
+            "lat": result[1],
+            "lon": result[2]
         })
-    
 
     return jsonify(tooltip)
 
@@ -101,7 +108,6 @@ def conn():
         info.iata_code,
         info.home_link
     ]
-
     first = db.session.query(*selCon).distinct()
     second = db.session.query(*sel)
     # third = first.join(second)

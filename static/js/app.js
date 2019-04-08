@@ -15,7 +15,7 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 }).addTo(map);
 
 d3.json("/tooltip", (data) => {
-  // console.log(data)
+  console.log(data)
 
   for (let i = 0; i < data.length; i++) {
     
@@ -33,4 +33,4 @@ d3.json("/tooltip", (data) => {
 
 d3.json("/conn", (data) => {
   console.log(data);
-})
+});
