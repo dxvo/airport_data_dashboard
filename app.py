@@ -13,9 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
-# 
-app.config["DATABASE_URL"] = "postgres://tmbsjdrhvxvrwz:ddf6e4b3e9e2066b6d2cc86d1869c5c0d18c7575909b07a598c221ae2ea3f81f@ec2-184-72-238-22.compute-1.amazonaws.com:5432/d2fbmddig8nvpu"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
 db = SQLAlchemy(app)
 
 Base = automap_base()
