@@ -32,7 +32,7 @@ def index():
 
 @app.route("/tooltip")
 def tooltip():
-  
+
     sel = [
         info.type,
         info.name,
@@ -41,8 +41,7 @@ def tooltip():
         info.elevation,
         info.municipality,
         info.iata_code,
-        info.home_link
-    ]
+        info.home_link]
 
     results = db.session.query(*sel).all()
 
