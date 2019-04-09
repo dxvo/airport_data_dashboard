@@ -90,8 +90,55 @@ def airline():
         })
     return jsonify(airlines)
 
+# Return monthly data 2017 and 2018 for a given airport
+@app.route("/monthly/<airportName>")
+def monthly(airportName):
+        sel = [
+        Monthly_Average.Month,
+        Monthly_Average.Depart_Delay,
+        Monthly_Average.Arrival_Delay,
+        Monthly_Average.Carrier_Delay,
+        Monthly_Average.Weather_Delay,
+        Monthly_Average.NAS_Delay,
+        Monthly_Average.Security_Delay, 
+        Monthly_Average.Aircraft_Delay,
+        Monthly_Average.Origin,
+        Monthly_Average.Year]
 
+        responses = db.session.query(*sel)\
+                            .filter(Monthly_Average.Origin == airportName)
+        
+        result = []
+        for response in responses:
+            result.append({
+                "Month": response[0],
+                "Depart_Delay": response[1],
+                "Arrival_Delay": response[2],
+                "Carrier_Delay":response[3],
+                "Weather_Delay":response[4],
+                "NAS_Delay":response[5],
+                "Security_Delay":response[6],
+                "Aircraft_Delay":response[7],
+                "Origin":response[8],
+                "Year":response[9]
+                })
+        
+        return jsonify(result)
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
