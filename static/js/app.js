@@ -13,6 +13,11 @@ function get_data(airport_code){
     console.log(info);
   });}
 
+function get_route(airport_code){
+  var url = "/routes/" + airport_code;
+  d3.json(url, function(info){
+    console.log(info.length);
+});}
 
 
 // Adding tile layer
@@ -47,7 +52,8 @@ d3.json("/tooltip", (data) =>
     var airport_symbol = d3.select("p").text()
     console.log(airport_symbol)
 
-    get_data(airport_symbol); 
+    //get_data(airport_symbol);
+    get_route(airport_symbol);
 
   });
 }})

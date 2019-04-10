@@ -15,9 +15,7 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport.sqlite"
 db = SQLAlchemy(app)
-
 Base = automap_base()
-
 Base.prepare(db.engine, reflect=True)
 
 # # Save references to each table
@@ -32,7 +30,6 @@ def index():
 
 @app.route("/tooltip")
 def tooltip():
-
     sel = [
         info.type,
         info.name,
@@ -42,7 +39,6 @@ def tooltip():
         info.municipality,
         info.iata_code,
         info.home_link]
-
     results = db.session.query(*sel).all()
 
     tooltip = []
@@ -73,7 +69,6 @@ def airline():
         Delay_By_Airline.Aircraft_Delay,
         Delay_By_Airline.Year
     ]
-
     results = db.session.query(*sel).all()
 
     airlines = []
@@ -126,7 +121,6 @@ def monthly(airportName):
         return jsonify(result)
 
 
-
 @app.route("/routes/<airportName>")
 def routes(airportName):
     sel = [
@@ -151,9 +145,6 @@ def routes(airportName):
             })
         
     return jsonify(result)
-
-
-
 
 
 if __name__ == "__main__":
