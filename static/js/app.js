@@ -1,6 +1,13 @@
 // Creating map object
 const API_KEY = "pk.eyJ1IjoiandvaDEzMjMiLCJhIjoiY2p0bGw5MmV5MDduYzQ0bGJhd2czamRmNyJ9.1zN6LD4MMEaOubjEcpkbNA";
 
+function get_route(airport_name){
+    var url = "/routes/"+airport_name
+
+    d3.json(url, function(info) 
+    {
+      console.log(info);
+    })};
 
 function SelectAirportSize(data) {
     if (data === "large_airport") {
@@ -67,12 +74,13 @@ L.featureGroup([circlesGroup])
 .on('click', () => {
   var airport_code = d3.select("p").text()
   var url = "/airports/" + airport_code;
-    d3.json(url, function(info){
+  get_route(airport_code);
+  d3.json(url, function(info){
 
       var year = d3.select("#selDataset").property("value")
       var info = info.filter((info) => info.Year == Updateyear(year))
       var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-  
+
       var trace1 = {
         x: month,
         y: info.map(row => row.Aircraft_Delay),
@@ -170,9 +178,9 @@ L.featureGroup([circlesGroup])
       };
 
       Plotly.newPlot("line2", data2, layout2);
-    });
+    });});
 
-});
+//Call get route 
             
   };
 
