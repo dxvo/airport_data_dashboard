@@ -71,37 +71,38 @@ L.featureGroup([circlesGroup])
 
       var year = d3.select("#selDataset").property("value")
       var info = info.filter((info) => info.Year == Updateyear(year))
+      var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   
       var trace1 = {
-        x: info.map(row => row.Month),
+        x: month,
         y: info.map(row => row.Aircraft_Delay),
         type: "lines",
         name: "Aircraft"
       };
 
       var trace2 = {
-        x: info.map(row => row.Month),
+        x: month,
         y: info.map(row => row.Carrier_Delay),
         type: "lines",
         name: "Carrier"
       };
 
       var trace3 = {
-        x: info.map(row => row.Month),
+        x: month,
         y: info.map(row => row.Weather_Delay),
         type: "lines",
         name: "Weather"
       };
 
       var trace4 = {
-        x: info.map(row => row.Month),
+        x: month,
         y: info.map(row => row.NAS_Delay),
         type: "lines",
         name: "NAS"
       };
 
       var trace5 = {
-        x: info.map(row => row.Month),
+        x: month,
         y: info.map(row => row.Security_Delay),
         type: "lines",
         name: "Security"
@@ -112,6 +113,13 @@ L.featureGroup([circlesGroup])
 
       var layout = {
         title: "Delay Reasons",
+        xaxis:{
+          title: 'Month',
+          tickangle: -45
+        },
+        yaxis:{
+          title: 'Total Mins'
+        },
         autosize: false,
         width: 400,
         height: 300,
@@ -124,15 +132,19 @@ L.featureGroup([circlesGroup])
       };
       
       Plotly.newPlot("line", data, layout);
+
+  //Departure and Arrival Delay Chart 
       var trace6 = {
-        x: info.map(row => row.Month),
+        x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         y: info.map(row => row.Depart_Delay),
         type: "bar",
         name: "Depart"
       };
 
+
       var trace7 = {
-        x: info.map(row => row.Month),
+        //x: info.map(row => row.Month),
+        x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         y: info.map(row => row.Arrival_Delay),
         type: "bar",
         name: "Arrival"
@@ -143,6 +155,10 @@ L.featureGroup([circlesGroup])
       var layout2 = {
         title: "Depart & Arrival Delay",
         autosize: false,
+        xaxis:{
+          title: 'Month',
+          tickangle: -45
+        },
         width: 400,
         height: 270,
         margin: {
