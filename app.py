@@ -151,6 +151,10 @@ def routes(airportName):
 def landing():
     return render_template('landing.html')
 
+@app.route("/readme")
+def readme():
+    return render_template('readme.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
