@@ -2,11 +2,11 @@
 var Airlines2017 =["American Airlines", "Alaska Airlines", "Jetblue Airways", "Delta", "Express Jet", "Frontier", "Hawaiian Airlines", "Spirit", "Skywest", "United Airlines", "Virgin America", "Southwest Airlines"]
 var Airlines2018 =["Endeavor Air", "American Airlines", "Alaska Airlines", "Jetblue Airways", "Delta", "Express Jet", "Frontier", "Allegiant Air", "Hawaiian Airlines", "Envoy Air", "Spirit", "US Airways Express", "Skywest", "United Airlines", "Virgin America", "Southwest Airlines", "Mesa Airlines", "Republic Airlines"]
 
+//Stack bar chart for each ariline 
 
 d3.json("/airlines", (data) => {
   
     var data = data.filter((data) => data.Year == "2017")
-  
   
     var trace1 = {
       x: data.map(row => row.Reporting_Airine),
@@ -55,8 +55,12 @@ d3.json("/airlines", (data) => {
     var layout = {
       title: "2017",
       barmode: 'stack',
+      yaxis:{
+        title: 'Percent'
+      },
       xaxis: {
-        margin: 'auto'
+        margin: 'auto',
+        title: "Airlines"
       }
     };
     
@@ -65,6 +69,7 @@ d3.json("/airlines", (data) => {
     
   });
   
+  //For 2018 stack chart 
   d3.json("/airlines", (data) => {
     
     var data = data.filter((data) => data.Year == "2018")
@@ -116,7 +121,14 @@ d3.json("/airlines", (data) => {
     // Apply the group bar mode to the layout
     var layout = {
       title: "2018",
-      barmode: 'stack'
+      barmode: 'stack',
+      yaxis:{
+        title: 'Percent'
+      },
+      xaxis: {
+        margin: 'auto',
+        title: "Airlines"
+      }
   
     };
     
@@ -124,11 +136,12 @@ d3.json("/airlines", (data) => {
     Plotly.newPlot("bar2", data, layout);
     
   });
+
+  //On time departure - Late Arrival 
   
   d3.json("/airlines", (data) => {
     
     var data = data.filter((data) => data.Year == "2017")
-  
   
     var trace1 = {
       x: data.map(row => row.Reporting_Airine),
@@ -139,9 +152,11 @@ d3.json("/airlines", (data) => {
     };
     
     var data = [trace1];
-    
     var layout = {
       title: "2017",
+      xaxis: {
+        title: "Airlines"
+      }
     };
     
     // Render the plot to the div tag with id "plot"
@@ -163,8 +178,10 @@ d3.json("/airlines", (data) => {
     };
     
     var data = [trace1];
-    
     var layout = {
+      xaxis: {
+        title: "Airlines"
+      },
       title: "2018",
   
     };
