@@ -49,7 +49,7 @@ def tooltip():
             "latitude": result[2],
             "longitude": result[3],
             "elevation": result[4],
-            "municiaplity": result[5],
+            "municipality": result[5],
             "iata_code": result[6],
             "home_link": result[7]
         })
