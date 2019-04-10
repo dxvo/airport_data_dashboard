@@ -16,7 +16,7 @@
   font-size: 4rem;
   color: rgb(245, 247, 248); 
   animation: title 1.2s forwards linear;
-  background-image: url("../img/airplane.jpg");
+  background-image: url("../img/airplane.png");
   background-attachment: fixed;
   background-position: top center;
   background-repeat: no-repeat;
