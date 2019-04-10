@@ -86,39 +86,40 @@ def airline():
     return jsonify(airlines)
 
 # Return monthly data 2017 and 2018 for a given airport
-@app.route("/monthly/<airportName>")
-def monthly(airportName):
-        sel = [
+@app.route("/airports/<airportName>")
+def airports(airportName):
+  
+    sel = [
+        Monthly_Average.Origin,
+        Monthly_Average.Year,
         Monthly_Average.Month,
         Monthly_Average.Depart_Delay,
         Monthly_Average.Arrival_Delay,
         Monthly_Average.Carrier_Delay,
         Monthly_Average.Weather_Delay,
         Monthly_Average.NAS_Delay,
-        Monthly_Average.Security_Delay, 
-        Monthly_Average.Aircraft_Delay,
-        Monthly_Average.Origin,
-        Monthly_Average.Year]
+        Monthly_Average.Security_Delay,
+        Monthly_Average.Aircraft_Delay
+    ]
 
-        responses = db.session.query(*sel)\
-                            .filter(Monthly_Average.Origin == airportName)
-        
-        result = []
-        for response in responses:
-            result.append({
-                "Month": response[0],
-                "Depart_Delay": response[1],
-                "Arrival_Delay": response[2],
-                "Carrier_Delay":response[3],
-                "Weather_Delay":response[4],
-                "NAS_Delay":response[5],
-                "Security_Delay":response[6],
-                "Aircraft_Delay":response[7],
-                "Origin":response[8],
-                "Year":response[9]
-                })
-        
-        return jsonify(result)
+    results = db.session.query(*sel).filter(Monthly_Average.Origin == airportName)
+
+    airports = []
+    for result in results:
+        airports.append({
+            "Origin": result[0],
+            "Year": result[1],
+            "Month": result[2],
+            "Depart_Delay": result[3],
+            "Arrival_Delay": result[4],
+            "Carrier_Delay": result[5],
+            "Weather_Delay": result[6],
+            "NAS_Delay": result[7],
+            "Security_Delay": result[8],
+            "Aircraft_Delay": result[9]
+
+        })
+    return jsonify(airports)
 
 
 @app.route("/routes/<airportName>")
