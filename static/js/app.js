@@ -40,7 +40,7 @@ function Updateyear(year) {
 
 let map = L.map("map", {
   center: [39.8283, -98.5795],
-  zoom: 4.5
+  zoom: 4.4
 });
 
 // Adding tile layer
