@@ -5,13 +5,13 @@ const API_KEY = "pk.eyJ1IjoiandvaDEzMjMiLCJhIjoiY2p0bGw5MmV5MDduYzQ0bGJhd2czamRm
 
 function SelectAirportSize(data) {
     if (data === "large_airport") {
-       return 60000
+       return 50000
     }
     else if (data === "medium_airport"){
-       return 40000
+       return 30000
     }
     else {
-      return 20000
+      return 10000
     }
 };
 
@@ -48,14 +48,15 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
   maxZoom: 18,
   id: "mapbox.outdoors",
-  accessToken: API_KEY
+  accessToken: API_KEY,
 }).addTo(map);
 
 
-var line_layer = new L.FeatureGroup();
+//var group = new L.FeatureGroup();
+//var coordinates = [];
+
 function get_route(airport_name){
     var url = "/routes/"+airport_name
-
     d3.json(url, function(info)
     {
       var coordinates = []
@@ -67,12 +68,18 @@ function get_route(airport_name){
         origin.push(info[i].orgin_long);
         dest.push(info[i].des_lat);
         dest.push(info[i].des_long);
-        coordinates.push(origin,dest); 
+        coordinates.push(origin,dest);
       }
       //var line_layer = new L.FeatureGroup();
-      line_layer.addLayer(L.polygon(coordinates));
-      map.addLayer(line_layer);
+      L.polygon(coordinates,{
+        color:'black',
+        weight:0.3
+      }).addTo(map).on('click',function(){
+        map.removeLayer(this);
+      })
       
+      //group.addLayer(route_layer); 
+      //map.addLayer(group);
       //map.removeLayer(line_layer);
     })};
 
@@ -94,16 +101,13 @@ d3.json("/tooltip", (data) => {
                            "<br>" + "<strong>Home Link</strong>: " + data[i].home_link + "<br>"
                           + "<p>" + data[i].iata_code + "</p>").addTo(map);
 
-
-
 L.featureGroup([circlesGroup])
 .on('click', () => {
-  map.removeLayer(line_layer);
+  //map.removeLayer(group);
   var airport_code = d3.select("p").text()
   var url = "/airports/" + airport_code;
-    get_route(airport_code);
-    d3.json(url, function(info){
-
+  get_route(airport_code);
+  d3.json(url, function(info){
       var year = d3.select("#selDataset").property("value")
       var info = info.filter((info) => info.Year == Updateyear(year))
       var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
