@@ -126,8 +126,38 @@ def monthly(airportName):
         return jsonify(result)
 
 
+
+@app.route("/routes/<airportName>")
+def routes(airportName):
+    sel = [
+        Airport_Route.Origin,
+        Airport_Route.Dest,
+        Airport_Route.Origin_lat,
+        Airport_Route.Origin_long,
+        Airport_Route.Dest_lat,
+        Airport_Route.Dest_long]
+
+    responses = db.session.query(*sel).filter(Airport_Route.Origin == airportName)
+        
+    result = []
+    for response in responses:
+        result.append({
+            "Origin": response[0],
+            "Dest": response[1],
+            "orgin_lat": response[2],
+            "orgin_long":response[3],
+            "des_lat":response[4],
+            "des_long":response[5],
+            })
+        
+    return jsonify(result)
+
+
+
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
 
 
