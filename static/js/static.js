@@ -1,3 +1,8 @@
+
+var Airlines2017 =["American Airlines", "Alaska Airlines", "Jetblue Airways", "Delta", "Express Jet", "Frontier", "Hawaiian Airlines", "Spirit", "Skywest", "United Airlines", "Virgin America", "Southwest Airlines"]
+var Airlines2018 =["Endeavor Air", "American Airlines", "Alaska Airlines", "Jetblue Airways", "Delta", "Express Jet", "Frontier", "Allegiant Air", "Hawaiian Airlines", "Envoy Air", "Spirit", "US Airways Express", "Skywest", "United Airlines", "Virgin America", "Southwest Airlines", "Mesa Airlines", "Republic Airlines"]
+
+
 d3.json("/airlines", (data) => {
   
     var data = data.filter((data) => data.Year == "2017")
@@ -6,7 +11,7 @@ d3.json("/airlines", (data) => {
     var trace1 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Aircraft_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2017,
       type: "bar",
       name: "Aircraft_Delay"
     };
@@ -14,7 +19,7 @@ d3.json("/airlines", (data) => {
     var trace2 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Carrier_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2017,
       type: "bar",
       name: "Carrier_Delay"
     };
@@ -22,7 +27,7 @@ d3.json("/airlines", (data) => {
     var trace3 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.NAS_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2017,
       type: "bar",
       name: "NAS_Delay"
     };
@@ -30,7 +35,7 @@ d3.json("/airlines", (data) => {
     var trace4 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Security_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2017,
       type: "bar",
       name: "Security_Delay"
     };
@@ -38,7 +43,7 @@ d3.json("/airlines", (data) => {
     var trace5 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Weather_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2017,
       type: "bar",
       name: "Weather_Delay"
     };
@@ -68,7 +73,7 @@ d3.json("/airlines", (data) => {
     var trace1 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Aircraft_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2018,
       type: "bar",
       name: "Aircraft_Delay"
     };
@@ -76,7 +81,7 @@ d3.json("/airlines", (data) => {
     var trace2 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Carrier_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2018,
       type: "bar",
       name: "Carrier_Delay"
     };
@@ -84,7 +89,7 @@ d3.json("/airlines", (data) => {
     var trace3 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.NAS_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2018,
       type: "bar",
       name: "NAS_Delay"
     };
@@ -92,7 +97,7 @@ d3.json("/airlines", (data) => {
     var trace4 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Security_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2018,
       type: "bar",
       name: "Security_Delay"
     };
@@ -100,7 +105,7 @@ d3.json("/airlines", (data) => {
     var trace5 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Weather_Delay),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2018,
       type: "bar",
       name: "Weather_Delay"
     };
@@ -128,7 +133,7 @@ d3.json("/airlines", (data) => {
     var trace1 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Dep_On_Late_Arr),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2017,
       type: "bar",
       name: "Aircraft_Delay"
     };
@@ -152,7 +157,7 @@ d3.json("/airlines", (data) => {
     var trace1 = {
       x: data.map(row => row.Reporting_Airine),
       y: data.map(row => row.Dep_On_Late_Arr),
-      text: data.map(row => row.Reporting_Airine),
+      text: Airlines2018,
       type: "bar",
       name: "Aircraft_Delay"
     };
