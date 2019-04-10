@@ -24,7 +24,7 @@ Delay_By_Airline = Base.classes.Delay_By_Airline
 Monthly_Average = Base.classes.Monthly_Average
 info = Base.classes.info
 
-@app.route("/")
+@app.route("/map")
 def index():
     return render_template('index.html')
 
@@ -147,9 +147,13 @@ def routes(airportName):
         
     return jsonify(result)
 
+@app.route("/")
+def landing():
+    return render_template('landing.html')
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
 
 

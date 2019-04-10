@@ -92,3 +92,75 @@ text-align: center;
   margin-right: 8px;
   opacity: 0.7;
 }
+
+
+.btn {
+  background-color: #40284A;
+  opacity: .8;
+}
+
+
+.lead {
+    color: black 
+}
+
+h1 {
+    color: #B34D25 
+}
+
+.navbar-default .navbar-brand {
+    color: #d6d6d6;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #F07E07;
+    margin: 1em 0;
+    padding: 0; 
+}
+
+.bg, .newsletter-bg {
+    background-image: url('../img/jumbotron2.jpg');
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
+  
+  .bg {
+    background-position: center top;
+    padding: 100px 300px;
+    height: 100vh
+  }
+  
+  .wrap {
+    position: relative;
+  }
+  
+  .newsletter-bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      margin: 0 auto;
+    background-position: center -100px;
+    -webkit-filter: blur(7px);
+  }
+  
+  .newsletter-text {
+      border: 2px solid #40284A;
+      padding: 50px;
+      margin: 0 auto;
+      position: relative;
+      max-width: 500px;
+      h2 {
+        color: white;
+        margin-top: 0;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+      }
+    }
