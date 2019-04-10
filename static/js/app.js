@@ -1,13 +1,7 @@
 // Creating map object
 const API_KEY = "pk.eyJ1IjoiandvaDEzMjMiLCJhIjoiY2p0bGw5MmV5MDduYzQ0bGJhd2czamRmNyJ9.1zN6LD4MMEaOubjEcpkbNA";
 
-function get_route(airport_name){
-    var url = "/routes/"+airport_name
 
-    d3.json(url, function(info) 
-    {
-      console.log(info);
-    })};
 
 function SelectAirportSize(data) {
     if (data === "large_airport") {
@@ -55,6 +49,31 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(map);
 
+function get_route(airport_name){
+    var url = "/routes/"+airport_name
+
+    d3.json(url, function(info)
+    {
+      var line_layer;
+      var coordinates = []
+      for (var i = 0; i < info.length; i++)
+      {
+        var origin = [];
+        var dest = [];
+        origin.push(info[i].orgin_lat);
+        origin.push(info[i].orgin_long);
+        dest.push(info[i].des_lat);
+        dest.push(info[i].des_long);
+        coordinates.push(origin,dest); 
+      }
+      var line_layer = new L.FeatureGroup();
+      line_layer.addLayer(L.polygon(coordinates));
+      map.addLayer(line_layer);
+      map.removeLayer(line_layer);
+    })};
+
+
+
 d3.json("/tooltip", (data) => {
   for (let i = 0; i < data.length; i++) {
   var circlesGroup = L.circle([data[i].latitude, data[i].longitude], {
@@ -64,18 +83,21 @@ d3.json("/tooltip", (data) => {
                             fillColor: SelectAirportColor(data[i].type),
                             radius: SelectAirportSize(data[i].type)
                           }).bindPopup("<h4>" + data[i].name + "</h4>" + 
-                          "<hr>" + "Municipality: " + data[i].municipality +
-                          "<br>" + "Elevation: " + data[i].elevation + "<br>" +
-                          "Latitude: " + data[i].latitude + "<br>" + "Longitude: " +
-                          data[i].longitude + "<br>" + "Home Link: " + data[i].home_link + "<br>"
+                          "<hr>" + "<strong>Municipality</strong>: " + data[i].municipality +
+                          "<br>" + "<strong>Elevation:</strong> " + data[i].elevation + "<br>" +
+                          "<strong>Latitude</strong>: " + data[i].latitude +
+                           "<br>" + "<strong>Longitude</strong>: " +data[i].longitude + 
+                           "<br>" + "<strong>Home Link</strong>: " + data[i].home_link + "<br>"
                           + "<p>" + data[i].iata_code + "</p>").addTo(map);
+
+
 
 L.featureGroup([circlesGroup])
 .on('click', () => {
   var airport_code = d3.select("p").text()
   var url = "/airports/" + airport_code;
-  get_route(airport_code);
-  d3.json(url, function(info){
+    get_route(airport_code);
+    d3.json(url, function(info){
 
       var year = d3.select("#selDataset").property("value")
       var info = info.filter((info) => info.Year == Updateyear(year))
@@ -196,7 +218,6 @@ legend.onAdd = function (map) {
 
     for (var i = 0; i < grades.length; i++) {
         grades[i];
-
         labels.push(
             '<i style="background:' + SelectAirportColor(grades[i]) + '"></i> ' + 
             grades[i]);
