@@ -13,7 +13,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport_db.sqlite"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/airport.sqlite"
 db = SQLAlchemy(app)
 
 Base = automap_base()
@@ -21,7 +21,7 @@ Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
 # # Save references to each table
-Airport_Route = Base.classes.Airport_Route
+#Airport_Route = Base.classes.Airport_Route
 Delay_By_Airline = Base.classes.Delay_By_Airline
 Monthly_Average = Base.classes.Monthly_Average
 info = Base.classes.info
@@ -127,7 +127,7 @@ def monthly(airportName):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug = True)
 
 
 
