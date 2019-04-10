@@ -21,7 +21,7 @@ Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
 # # Save references to each table
-#Airport_Route = Base.classes.Airport_Route
+Airport_Route = Base.classes.Airport_Route
 Delay_By_Airline = Base.classes.Delay_By_Airline
 Monthly_Average = Base.classes.Monthly_Average
 info = Base.classes.info
