@@ -36,6 +36,8 @@ function Updateyear(year) {
   }
 };
 
+//let line_layer;
+
 let map = L.map("map", {
   center: [39.8283, -98.5795],
   zoom: 4.5
@@ -49,12 +51,13 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(map);
 
+
+var line_layer = new L.FeatureGroup();
 function get_route(airport_name){
     var url = "/routes/"+airport_name
 
     d3.json(url, function(info)
     {
-      var line_layer;
       var coordinates = []
       for (var i = 0; i < info.length; i++)
       {
@@ -66,10 +69,11 @@ function get_route(airport_name){
         dest.push(info[i].des_long);
         coordinates.push(origin,dest); 
       }
-      var line_layer = new L.FeatureGroup();
+      //var line_layer = new L.FeatureGroup();
       line_layer.addLayer(L.polygon(coordinates));
       map.addLayer(line_layer);
-      map.removeLayer(line_layer);
+      
+      //map.removeLayer(line_layer);
     })};
 
 
@@ -94,6 +98,7 @@ d3.json("/tooltip", (data) => {
 
 L.featureGroup([circlesGroup])
 .on('click', () => {
+  map.removeLayer(line_layer);
   var airport_code = d3.select("p").text()
   var url = "/airports/" + airport_code;
     get_route(airport_code);
